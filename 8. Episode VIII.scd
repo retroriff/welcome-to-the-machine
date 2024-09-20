@@ -1,8 +1,6 @@
-Ndef(\x).proxyspace.fadeTime = 10;
-
 (
-~m91 = Ndef(\m91);
-~m91[0] = {
+~m81 = Ndef(\m81);
+~m81[0] = {
     var trig = Impulse.kr(t);
     Greyhole.ar(
         in: Impulse.ar(t * 4),
@@ -19,8 +17,8 @@ Ndef(\x).proxyspace.fadeTime = 10;
 
 
 (
-~m92 = Ndef(\m92);
-~m92[0] = {
+~m82 = Ndef(\m82);
+~m82[0] = {
     var sig = Impulse.ar(MouseX.kr(1, 1000));
     Greyhole.ar(
         in: sig,
@@ -34,8 +32,8 @@ Ndef(\x).proxyspace.fadeTime = 10;
 )
 
 (
-~m93 = Ndef(\m93);
-~m93[0] = {
+~m83 = Ndef(\m83);
+~m83[0] = {
     var waveLength = LFNoise1.kr(t / 16).range(0.05, 0.5);
     var freq = LFNoise1.kr(waveLength).range(300, 2000);
     var mul = LFNoise1.kr(t / 15).range(0.02, 0.6);

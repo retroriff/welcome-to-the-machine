@@ -1,7 +1,3 @@
-FadeIn(\m52, 2)
-FadeOut(\m54)
-Nfx(\m51).gverb(1).reverb(0.8)
-
 (
 ~m51 = Ndef(\m51);
 ~m51[0] = {
@@ -46,6 +42,7 @@ Nfx(\m51).gverb(1).reverb(0.8)
 );
 
 (
+~m54 = Ndef(\m54);
 ~m54[0] = {
     LFPulse.ar(
         freq: SinOscFB.kr(freq: t * 4, feedback: 1).range(300, 600),

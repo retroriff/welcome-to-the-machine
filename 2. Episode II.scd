@@ -1,15 +1,3 @@
-FadeIn(\m25);
-FadeOut(\m22);
-Crossfader(\m24, \m25);
-Ndef.all
-
-Nfx(\m25).pan(\wave)
-
-~emadd9 = [52, 55, 59, 54].midicps
-~emadd = [52, 55, 59, 54].midicps
-
-Px([(i: \bd)]).gverb.delay(1)
-
 (
 ~m21 = Ndef(\m21);
 ~m21[0] = {
@@ -37,7 +25,7 @@ Px([(i: \bd)]).gverb.delay(1)
 
 (
 ~m23 = Ndef(\m23);
-Ndef(\test, {
+~m23[0] = {
     var lfo1 = LFSaw.kr(t / 4).range(1, 3).tanh;
     var lfo2 = LFPulse.kr(t / 4).range(0.1, 0.5);
     var em = [52, 55, 59];
