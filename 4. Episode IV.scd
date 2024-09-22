@@ -1,6 +1,3 @@
-
-FadeIn(\m43);
-
 (
 ~m41 = Ndef(\m41);
 ~m41[0] = {
@@ -26,7 +23,7 @@ FadeIn(\m43);
         mul: LFSaw.kr(t / 4).range(0, 0.3)
     );
     var sig2 = LFSaw.ar(t / 4).range(0, 1.5);
-    sig1 * sig2;
+    sig1 * sig2 * 0.7;
 }
 )
 

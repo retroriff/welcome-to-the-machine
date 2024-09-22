@@ -1,7 +1,3 @@
-FadeIn(\m71)
-FadeOut(\m62)
-Crossfader(\m62, \m71)
-
 (
 ~note = 3.rand * 12 + 28;
 ~m71 = Ndef(\m71);

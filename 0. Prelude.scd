@@ -99,11 +99,10 @@ b = Buffer.readChannel(s, "samples/Chord1.aiff".resolveRelative, channels:[0]);
 (
 ~m03 = Ndef(\m03);
 ~m03[0] = {
-    var auto, freq, out, trig;
-    freq = \freq.kr(40);
-    trig = ToggleFF.ar(Dust.ar(8));
-    auto = trig.lagud(1, 0.5);
-    out = Saw.ar(freq);
+    var freq = \freq.kr(40);
+    var trig = ToggleFF.ar(Dust.ar(8));
+    var auto = trig.lagud(1, 0.5);
+    var out = Saw.ar(freq);
     out = Splay.ar(out);
     out = (out * 3).fold2;
     out = RLPF.ar(out, freq * MouseX.kr(1600, 1000), 1);

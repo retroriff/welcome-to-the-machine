@@ -1,17 +1,14 @@
-FadeIn(\m91)
-FadeIn(\m93)
-
 (
 ~m91 = Ndef(\m91);
 ~m91[0] = {
     var lfo1 = LFPulse.ar(t / 2).range(0.5, 1);
     var lfo2 = SinOscFB.ar(t * 8).range(0.5, 1);
-
-    SinOscFB.ar(
+    var in = SinOscFB.ar(
         freq: [52, 57].midicps * lfo1 * lfo2,
         feedback: SinOsc.kr(t / 16, 0).max(0),
         mul: 1
     ).tanh * 0.7;
+    HPF.ar(in, freq: 150);
 };
 )
 
@@ -49,6 +46,7 @@ FadeIn(\m93)
         maxdelaytime: t * 1.1,
         delaytime: t / 8,
         decaytime: t
-    );
+    ) * 0.8;
 };
 )
+

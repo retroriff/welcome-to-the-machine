@@ -35,7 +35,7 @@
         freq: ([28, 40] + LFNoise0.ar(t / 2).range(1, 1)).midicps,
         iphase: 0,
         mul: LFSaw.kr(t / 2).range(0, 0.3)
-    )
+    ) * 0.7
 }
 )
 

@@ -3,20 +3,21 @@
 ~m21[0] = {
     var lfo1 = LFSaw.kr(t / 4).range(1, 3).tanh;
     var lfo2 = LFPulse.kr(t / 2).range(0.2, 1);
-
-    Pulse.ar(
+    var in = Saw.ar(
         freq: [100, 101] * LFPulse.kr(t * 2).range(0.5, 1),
-        width: LFSaw.kr(t / 3).range(0.1, 0.5),
-        mul: lfo1 * lfo2
-    ) * 0.7;
+        mul: lfo1 * lfo2 * 0.5
+    );
+    HPF.ar(in, freq: 100);
 }
 )
+
+\m22.in
 
 (
 ~m22 = Ndef(\m22);
 ~m22[0] = {
     SinOscFB.ar(
-        freq: [52, 55, 59, 54].midicps * LFPulse.kr(t * 4).range(2, 3.5),
+        freq: [100, 101] * LFPulse.kr(t * 4).range(2, 3.5),
         feedback: LFSaw.kr(t / 3).range(0.1, 1),
         mul: LFPulse.kr(t / 2).range(0.2, 0.5)
     );
@@ -30,12 +31,12 @@
     var lfo2 = LFPulse.kr(t / 4).range(0.1, 0.5);
     var em = [52, 55, 59];
     var em9 = [55, 59, 54];
-
-    Pulse.ar(
-        freq: em9.midicps * LFPulse.kr(t * 4).range(0.5, 1.5),
-        width: LFSaw.kr(t / 3).range(0.1, 0.5),
-        mul: lfo1 * lfo2
+    var in = Pulse.ar(
+        freq: em.midicps * LFPulse.kr(t * 4).range(0.5, 1.5),
+        width: LFSaw.kr(t / 4).range(0.1, 0.5),
+        mul: lfo1 * lfo2 * 0.5
     );
+    HPF.ar(in, freq: 52.midicps);
 });
 )
 
@@ -45,7 +46,7 @@
     Pulse.ar(
         freq: [40, 52].midicps * Gbman2DN.kr(t / 2).range(6, 6),
         width: SinOsc.kr(t / 8).range(0, 1),
-        mul: LFPulse.kr(t * 8, 0).range(0.4, 0)
+        mul: LFPulse.kr(t * 8, 0).range(0.4, 0) * 0.4
     );
 }
 )

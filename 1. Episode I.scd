@@ -1,16 +1,13 @@
-Crossfader(\m03, \m11)
-FadeIn(\m13)
-FadeOut(\px);
-
 (
 ~m11 = Ndef(\m11);
 ~m11[0] = {
-    SinOscFB.ar(
-        freq: [100, 101],
-        feedback: LFSaw.kr(t / 4).range(0.2, 1),
-        mul: LFPulse.kr(t / 2).range(0.2, 1),
+    var in = SinOscFB.ar(
+            freq: [100, 101],
+            feedback: LFSaw.kr(t / 4).range(0.2, 1),
+            mul: LFPulse.kr(t / 2).range(0.2, 1),
     );
-}
+    HPF.ar(in, freq: 52.midicps);
+};
 )
 
 (
