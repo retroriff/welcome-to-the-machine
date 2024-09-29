@@ -45,8 +45,8 @@
 ~m24[0] = {
     Pulse.ar(
         freq: [40, 52].midicps * Gbman2DN.kr(t / 2).range(6, 6),
-        width: SinOsc.kr(t / 8).range(0, 1),
-        mul: LFPulse.kr(t * 8, 0).range(0.4, 0) * 0.4
+        width: SinOsc.kr(t / 8).unipolar(1),
+        mul: LFPulse.kr(t * 8, 0).unipolar(0.4) * 0.4
     );
 }
 )

@@ -17,7 +17,7 @@
 ~m92[0] = {
     Mix.fill(10, {
         Ringz.ar(
-            in: WhiteNoise.ar(0.001) !2,
+            in: WhiteNoise.ar(0.001) ! 2,
             freq: XLine.kr(
                 start: 50.midicps * 4,
                 end: 40.midicps * 8,

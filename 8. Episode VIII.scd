@@ -3,18 +3,17 @@
 ~m81[0] = {
     var trig = Impulse.kr(t);
     Greyhole.ar(
-        in: Impulse.ar(t * 4),
-        delayTime: 0.1,
-        damp: 0.5,
-        size: 0.9,
-        diff: 0.7,
-        feedback: 0.1,
-        modDepth: 0.01,
-        modFreq: 0.5
+        Impulse.ar(t * 4),
+        \delayTime.kr(0.1),
+        \damp.kr(0.5),
+        \size.kr(0.9),
+        \diff.kr(0.7),
+        \feedback.kr(0.1),
+        \modDepth.kr(0.01),
+        \modFreq.kr(0.5)
     ) * 2;
 })
 )
-
 
 (
 ~m82 = Ndef(\m82);
@@ -34,14 +33,14 @@
 (
 ~m83 = Ndef(\m83);
 ~m83[0] = {
-    var waveLength = LFNoise1.kr(t / 16).range(0.05, 0.5);
+    var waveLength = LFNoise1.kr(t / 16).range(0.05, 1);
     var freq = LFNoise1.kr(waveLength).range(300, 2000);
-    var mul = LFNoise1.kr(t / 15).range(0.02, 0.6);
+    var mul = LFNoise1.kr(t / 16).range(0.02, 1);
 
     BPF.ar(
-        BrownNoise.ar(0.1).dup,
+        BrownNoise.ar(0.5).dup,
         freq,
-        mul: mul,
+        mul,
     );
 };
 )
