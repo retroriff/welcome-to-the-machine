@@ -24,7 +24,8 @@ var keysAndScales = Dictionary[
 Tdef(\t01, {
     loop {
         (1..8).choose.do({
-            var rate = (~scale.choose + ~key).midicps;
+            var octaves = [2, 1, 0.5, 0.25].choose;
+            var rate = (~scale.choose + ~key).midicps * octaves;
 
             4.do({
                 Synth.new(\gs, [
@@ -39,6 +40,7 @@ Tdef(\t01, {
                     \rel, exprand(3, 6),
                 ]);
             });
+
             exprand(0.1, 8).wait;
         });
     };
@@ -58,14 +60,14 @@ Tdef(\t01, {
         add: ~key
     );
 
-    var lowFreqDetuning = LFNoise1.kr([3, 3], 0.04);
-
     var drone5ths = RLPF.ar(
-        in: LFPulse.ar([~key, ~key + 7].midicps, 0.15),
-        freq: SinOsc.kr(0.1, 0, 10, ~key + 12).midicps,
+        in: LFPulse.ar([~key, ~key + 7].midicps, iphase: 0.15),
+        freq: SinOsc.kr(0.1, mul: 10, add: ~key + 12).midicps,
         rq: 0.1,
         mul: 0.05
     );
+
+    var lowFreqDetuning = LFNoise1.kr([3, 3], mul: 0.04);
 
     var osc1 = SinOsc.ar((freq + lowFreqDetuning).midicps, mul: 0.1);
     var osc2 = Impulse.ar(freq.midicps, phase: 2);
