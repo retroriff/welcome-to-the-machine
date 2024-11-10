@@ -7,24 +7,19 @@
         freq: [52, 57].midicps * lfo1 * lfo2,
         feedback: SinOsc.kr(t / 16, 0).max(0),
         mul: 1
-    ).tanh * 0.7;
-    HPF.ar(in, freq: 150);
+    ).tanh * -3.dbamp;
+
+    RHPF.ar(in, freq: \freq.kr(150), rq: \rq.kr(1));
 };
 )
 
 (
 ~m92 = Ndef(\m92);
 ~m92[0] = {
-    Mix.fill(10, {
+    Mix.fill(10.exprand, {
         Ringz.ar(
             in: WhiteNoise.ar(0.001) ! 2,
-            freq: XLine.kr(
-                start: 50.midicps * 4,
-                end: 40.midicps * 8,
-                dur: 60
-            ),
-            decaytime: 0.6,
-            mul: 0.4
+            freq: 40.midicps * 8,
         );
     });
 };
@@ -34,19 +29,21 @@
 ~m93 = Ndef(\m93);
 ~m93[0] = {
     var freq = SinOscFB.ar(
-        freq: [1, 1.1] * 52.midicps * 4,
+        freq: [1, 1.1] * 64.midicps,
         feedback: 0.5,
-        mul: 0.2
+        mul: 0.4
     );
 
-    var trig = Trig.ar(LFPulse.ar(t / 4), dur: 0.2).lag;
+    var trig = Trig.ar(
+        in: LFPulse.ar(t / 4),
+        dur: 0.2
+    ).lag;
 
     CombC.ar(
         in: freq * trig,
         maxdelaytime: t * 1.1,
         delaytime: t / 8,
         decaytime: t
-    ) * 0.8;
+    ) * -6.dbamp;
 };
 )
-

@@ -6,11 +6,10 @@
         maxfreq: 400,
         x0: LFPulse.kr(t / 8).range(0.5, 3),
         y0: LFPulse.kr(t / 8).range(0, 4),
-        mul: LFSaw.kr(t * 8).range(0.5, 1) * 2
-    )
-}
+        mul: LFSaw.kr(t * 8).range(0.5, 2)
+    ) * -4.dbamp
+};
 )
-
 
 (
 ~m42 = Ndef(\m42);
@@ -23,10 +22,9 @@
         mul: LFSaw.kr(t / 4).range(0, 0.3)
     );
     var sig2 = LFSaw.ar(t / 4).range(0, 1.5);
-    sig1 * sig2 * 0.7;
+    sig1 * sig2 * -6.dbamp;
 }
 )
-
 
 (
 ~m43 = Ndef(\m43);
@@ -37,7 +35,6 @@
         x0: 1.2,
         y0: 2,
         mul: LFSaw.kr(t).range(0, 0.8)
-    ) !2;
+    ) ! 2;
 }
 )
-

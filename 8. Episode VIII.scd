@@ -11,7 +11,7 @@
         \feedback.kr(0.1),
         \modDepth.kr(0.01),
         \modFreq.kr(0.5)
-    ) * 2;
+    ) * 8.dbamp;
 })
 )
 
@@ -26,7 +26,7 @@
         size: 0.9,
         diff: 0.707,
         feedback: 0.9
-    ) * 0.3;
+    ) * -6.dbamp;
 })
 )
 

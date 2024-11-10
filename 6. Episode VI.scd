@@ -1,48 +1,50 @@
-FadeIn(\m63, 0)
-FadeOut(\m62)
-
-
+// Play with freq: SinOsc.kr(t).range(62, 100).midicps
 (
 ~m61 = Ndef(\m61);
 ~m61[0] = {
     RLPF.ar(
-        in: LFPulse.ar([28, 40].midicps, 0.15),
-        freq: SinOsc.kr(t).range(300, 400),
+        in: LFPulse.ar([28, 40].midicps, iphase: 0.15),
+        freq: SinOsc.kr(t).range(62, 67.clip(67, 120)).midicps,
         rq: LFNoise0.kr(t / 8).range(0.1, 0.9),
         mul: LFPulse.kr(t * 4).range(0, 0.5).lag(0.1)
-    ) * 1.4;
+    );
 }
 )
 
 (
+var buffer = Buffer.loadCollection(s, [0, 3, 7, 11]);
 ~m62 = Ndef(\m62);
-a = Buffer.loadCollection(s, [0, 4, 7, 11]);
 
 ~m62[0] = {
 	var index, sig, pch, freq;
+
 	index = LFDNoise0.kr(t / 4).range(0, 1);
-    index = (index * BufFrames.kr(a));
-    pch = (Index.kr(a, index) + 40).lag;
-	freq = pch.midicps;
-	sig = VarSaw.ar(freq, mul: 0.2!2);
-	sig = CombN.ar(sig, 0.31, 0.31, 2, 1);
+    index = (index * BufFrames.kr(buffer));
+    pch = (Index.kr(buffer, in: index) + [40, 52]).lag;
+    freq = pch.midicps;
+
+    sig = VarSaw.ar(freq) * -6.dbamp;
+    sig = Splay.ar(sig);
+
+	sig = CombN.ar(
+        in: sig,
+        maxdelaytime: 0.31,
+        delaytime: 0.31,
+        decaytime: 2
+    );
 }
 )
-
 
 (
-~m63 = Ndef(\m63);
-b = Buffer.loadCollection(s, [0, 4, 7, 11]);
+var buffer = Buffer.loadCollection(s, [0, 3, 7, 11]);
 
+~m63 = Ndef(\m63);
 ~m63[0] = {
     var freq = Index.kr(
-        bufnum: b,
+        bufnum: buffer,
         in: LFSaw.kr(t / 4).range(0, 5)
     );
-    VarSaw.ar(
-        freq: (freq + 40).midicps,
-        mul: 0.3
-    );
+
+    VarSaw.ar(freq: (freq + [40, 52]).midicps) * -12.dbamp;
 }
 )
-

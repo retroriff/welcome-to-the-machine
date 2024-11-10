@@ -24,12 +24,12 @@ var keysAndScales = Dictionary[
 Tdef(\t01, {
     loop {
         (1..8).choose.do({
-            var octaves = [2, 1, 0.5, 0.25].choose;
+            var octaves = [0.25, 0.5, 1, 2].choose;
             var rate = (~scale.choose + ~key).midicps * octaves;
 
             4.do({
                 Synth.new(\gs, [
-                    \amp, exprand(0.05, 0.25),
+                    \amp, exprand(0.05, 0.55),
                     \atk, exprand(1, 4),
                     \baseDur, 0.02,
                     \buf, ~buf,
@@ -78,7 +78,8 @@ Tdef(\t01, {
         delaytime: 0.31,
         decaytime: 2,
         mul: 2,
-        add: osc1);
+        add: osc1
+    );
 
     osc2 = Greyhole.ar(
         in: osc2 * MouseY.kr(0, 1),
@@ -86,7 +87,7 @@ Tdef(\t01, {
         damp: 0.5
     );
 
-    osc1 + osc2;
+    osc1 + osc2 * -2.dbamp;
 }
 )
 
@@ -96,6 +97,11 @@ Tdef(\t01, {
     var lfo1 = LFPulse.ar(t / 2).range(0.5, 1);
     var lfo2 = SinOscFB.ar(t * 8).range(0.5, 1);
     var randPos = Array.rand(4, 1, 4) / 10;
+    var pos = Demand.kr(
+        Impulse.kr(t / 8),
+        reset: 0,
+        demandUGens: Dseq(randPos, inf)
+    );
 
     GrainBuf.ar(
         numChannels: 2,
@@ -103,7 +109,7 @@ Tdef(\t01, {
         dur: 0.7,
         sndbuf: ~buf,
         rate: 1,
-        pos: Demand.kr(Impulse.kr(t / 8), 0, Dseq(randPos, inf)),
+        pos: pos,
         interp: 2,
         pan: MouseX.kr(-0.7, 0.7),
     );

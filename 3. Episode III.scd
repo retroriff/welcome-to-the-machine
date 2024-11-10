@@ -8,8 +8,8 @@
             Array.fill(4, 1)
         ],
         input: { ClipNoise.ar(0.02) }.dup,
-        freqscale: 52.midicps * 2
-    )
+        freqscale: 64.midicps
+    );
 }
 )
 
@@ -35,7 +35,7 @@
         freq: ([28, 40] + LFNoise0.ar(t / 2).range(1, 1)).midicps,
         iphase: 0,
         mul: LFSaw.kr(t / 2).range(0, 0.3)
-    ) * 0.7
+    ) * -3.dbamp;
 }
 )
 
@@ -50,7 +50,7 @@
 
     var sig2 = LFPulse.ar(t / 8).range(0.2, 1);
 
-    sig1 * sig2;
+    sig1 * sig2 * -4.dbamp;
 }
 )
 
@@ -61,7 +61,7 @@
     SinOscFB.ar(
         freq: [52, 64].midicps + 12,
         feedback: LFSaw.kr(t / 4).range(0.01, 1),
-        mul: LFSaw.kr(t * 4).range(0, 0.5)
+        mul: LFSaw.kr(t * 4).range(0, -7.dbamp)
     )
 }
 )

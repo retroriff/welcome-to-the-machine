@@ -1,11 +1,15 @@
 (
-~note = 3.rand * 12 + 28;
+~note = 24 + 28;
+
 ~m71 = Ndef(\m71);
 ~m71[0] = {
     var pattern = Dseq(Bjorklund2(5, 8), inf) * 1/4;
     var trig = TDuty.ar(pattern);
     var env = Env.perc(0.01, 0.5).ar(gate: trig);
-    var sig = Saw.ar([~note, ~note * \detune.kr(1.1)].midicps, mul: 0.3);
+    var sig = Saw.ar(
+        freq: [~note, ~note * \detune.kr(1.1)].midicps,
+        mul: 0.3
+    );
 
     sig = Greyhole.ar(
         in: sig,

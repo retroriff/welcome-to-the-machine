@@ -8,7 +8,7 @@
         freq: SinOscFB.kr(t / 8).range(4, 16),
         width: SinOscFB.kr(t / 8).range(0.2, 1),
     );
-    sig1 * sig2 * 0.2;
+    sig1 * sig2 * -12.dbamp;
 }
 )
 
@@ -24,7 +24,7 @@
     );
     var sig2 = SinOsc.ar(300);
     sig1 * sig2;
-}
+};
 )
 
 (
@@ -34,10 +34,12 @@
         freq: t * 8,
         iphase: 1,
         width: 0.2,
-        mul: SinOscFB.kr(t / 16).range(0.1, 0.2)
+        mul: SinOscFB.kr(t / 16).range(0.1, 1)
     );
-    var sig2 = SinOsc.ar(freq: [600, 605], mul: 0.2);
-    sig1 * sig2;
+    var sig2 = SinOsc.ar(freq: [600, 605]);
+    var in = sig1 * sig2;
+
+    HPF.ar(in, freq: 64.midicps);
 }
 );
 
@@ -48,8 +50,7 @@
         freq: SinOscFB.kr(freq: t * 4, feedback: 1).range(300, 600),
         iphase: 0,
         width: SinOscFB.kr(t).range(0, 1),
-        mul: SinOsc.kr(t / 4).range(0.2, 1) * 0.1
+        mul: SinOsc.kr(t / 4).range(0.2, 1) * -12.dbamp
     );
 }
-)
 )
