@@ -10,7 +10,10 @@ Ndef(\m61, {
 )
 
 (
-var buffer = Buffer.loadCollection(s, [0, 3, 5, 7].stutter(2).scramble.mirror2);
+var collection = [0, 3, 5, 7].stutter(2).scramble.mirror2;
+var buffer = Buffer.loadCollection(s, collection);
+
+("🎲" + collection).postln;
 
 Ndef(\m62, {
 	var env, gate = 1, index, pitch, sig, freq;
