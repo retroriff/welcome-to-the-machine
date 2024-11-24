@@ -1,6 +1,5 @@
 (
-~m11 = Ndef(\m11);
-~m11[0] = {
+Ndef(\m11, {
     var freq = \freq.kr(40);
     var trig = ToggleFF.ar(Dust.ar(8));
     var auto = trig.lagud(1, 0.5);
@@ -23,8 +22,7 @@
 )
 
 (
-~m12 = Ndef(\m12);
-~m12[0] = {
+Ndef(\m12, {
     var in = SinOscFB.ar(
         freq: [100, 101],
         feedback: LFSaw.kr(t / 4).range(0.2, 1),
@@ -32,7 +30,7 @@
     );
 
     HPF.ar(in, freq: 60.midicps);
-};
+});
 )
 
 
@@ -43,12 +41,11 @@
 Px reverb: 0.4 blp: 0.4;
 
 (
-~m14 = Ndef(\m14);
-~m14[0] = {
+Ndef(\m14, {
     Greyhole.ar(
         in: Impulse.ar(t * MouseX.kr(1, 1000), mul: 0.3),
         delayTime: 2,
         damp: 0.5
     );
-};
+});
 )

@@ -48,8 +48,7 @@ Tdef(\t01, {
 )
 
 (
-~m01 = Ndef(\m01);
-~m01[0] = {
+Ndef(\m01, {
     var buffer = Buffer.alloc(s, ~scale.size, 1, {|b| b.setnMsg(0, ~scale) });
 
     var freq = DegreeToKey.kr(
@@ -88,12 +87,11 @@ Tdef(\t01, {
     );
 
     osc1 + osc2 * -2.dbamp;
-}
+});
 )
 
 (
-~m02 = Ndef(\m02);
-~m02[0] = {
+Ndef(\m02, {
     var lfo1 = LFPulse.ar(t / 2).range(0.5, 1);
     var lfo2 = SinOscFB.ar(t * 8).range(0.5, 1);
     var randPos = Array.rand(4, 1, 4) / 10;
@@ -113,5 +111,5 @@ Tdef(\t01, {
         interp: 2,
         pan: MouseX.kr(-0.7, 0.7),
     );
-};
+});
 )

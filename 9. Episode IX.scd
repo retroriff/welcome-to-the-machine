@@ -1,6 +1,5 @@
 (
-~m91 = Ndef(\m91);
-~m91[0] = {
+Ndef(\m91, {
     var lfo1 = LFPulse.ar(t / 2).range(0.5, 1);
     var lfo2 = SinOscFB.ar(t * 8).range(0.5, 1);
     var in = SinOscFB.ar(
@@ -10,24 +9,22 @@
     ).tanh * -3.dbamp;
 
     RHPF.ar(in, freq: \freq.kr(150), rq: \rq.kr(1));
-};
+});
 )
 
 (
-~m92 = Ndef(\m92);
-~m92[0] = {
+Ndef(\m92, {
     Mix.fill(10.exprand, {
         Ringz.ar(
             in: WhiteNoise.ar(0.001) ! 2,
             freq: 40.midicps * 8,
         );
     });
-};
+});
 )
 
 (
-~m93 = Ndef(\m93);
-~m93[0] = {
+Ndef(\m93, {
     var freq = SinOscFB.ar(
         freq: [1, 1.1] * 64.midicps,
         feedback: 0.5,
@@ -45,5 +42,5 @@
         delaytime: t / 8,
         decaytime: t
     ) * -6.dbamp;
-};
+});
 )

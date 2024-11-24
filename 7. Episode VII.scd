@@ -1,8 +1,7 @@
 (
 ~note = 24 + 28;
 
-~m71 = Ndef(\m71);
-~m71[0] = {
+Ndef(\m71, {
     var pattern = Dseq(Bjorklund2(5, 8), inf) * 1/4;
     var trig = TDuty.ar(pattern);
     var env = Env.perc(0.01, 0.5).ar(gate: trig);
@@ -21,5 +20,5 @@
     ) * env;
 
     CombC.ar(sig, maxdelaytime: 1, delaytime: 0.5, decaytime: 6);
-};
+});
 )
