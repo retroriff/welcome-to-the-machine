@@ -34,4 +34,4 @@ Ndef(\m62, {
 });
 )
 
-Nfx new: \m62 delay: 0.7 gverb: 0.5 blp: 0.4;
+Fx new: \m62 delay: 0.7 gverb: 0.5 blp: 0.4;

@@ -2,7 +2,7 @@
 Ndef(\m41, {
     Gbman2DL.ar(
         minfreq: [400, 390],
-        maxfreq: 400,
+        maxfreq: 60.midicps,
         x0: LFPulse.kr(t / 8).range(0.5, 3),
         y0: LFPulse.kr(t / 8).range(0, 4),
         mul: LFSaw.kr(t * 8).range(0.5, 2)
