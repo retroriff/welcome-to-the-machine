@@ -2,21 +2,29 @@
 var chord = \emAdd9;
 var keysAndScales = Dictionary[
     \cMaj7 -> Dictionary[
+        \degree -> [0, 4, 7, 11],
         \key -> 48,
-        \scale -> [ 0, 4, 7, 11]
+        \root -> 0,
+        \scale -> \major
     ],
     \emAdd9 -> Dictionary[
+        \degree -> [0, 3, 7, 14],
         \key -> 52,
-        \scale -> [0, 3, 7, 14]
+        \root -> 4,
+        \scale -> \minor
     ],
     \aMaj -> Dictionary[
+        \degree -> [0, 2, 4, 5, 7, 9, 11],
         \key -> 57,
-        \scale -> [0, 2, 4, 5, 7, 9, 11]
+        \root -> 9,
+        \scale -> \major
     ],
 ];
 
 ~buf = Buffer.readChannel(s, "samples/Chord1.aiff".resolveRelative, channels:[0]);
+~degree = keysAndScales[chord][\degree];
 ~key = keysAndScales[chord][\key];
+~root = keysAndScales[chord][\root];
 ~scale = keysAndScales[chord][\scale];
 )
 
@@ -25,7 +33,7 @@ Tdef(\t01, {
     loop {
         (1..8).choose.do({
             var octaves = [0.25, 0.5, 1, 2].choose;
-            var rate = (~scale.choose + ~key).midicps * octaves;
+            var rate = (~degree.choose + ~key).midicps * octaves;
 
             4.do({
                 Synth.new(\gs, [
@@ -49,11 +57,11 @@ Tdef(\t01, {
 
 (
 Ndef(\m01, {
-    var buffer = Buffer.alloc(s, ~scale.size, 1, {|b| b.setnMsg(0, ~scale) });
+    var buffer = Buffer.alloc(s, ~degree.size, 1, {|b| b.setnMsg(0, ~degree) });
 
     var freq = DegreeToKey.kr(
         buffer.bufnum,
-        in: MouseX.kr(0, 15),
+        in: MouseX.kr(0, 12),
         octave: 12,
         mul: 1,
         add: ~key
@@ -86,7 +94,7 @@ Ndef(\m01, {
         damp: 0.5
     );
 
-    osc1 + osc2 * -2.dbamp;
+    (osc1 + osc2) * \dbamp.kr(-2).dbamp;
 });
 )
 
