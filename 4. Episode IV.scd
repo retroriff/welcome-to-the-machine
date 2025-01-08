@@ -1,38 +1,27 @@
 (
 Ndef(\m41, {
-    Gbman2DL.ar(
-        minfreq: [400, 390],
-        maxfreq: 60.midicps,
-        x0: LFPulse.kr(t / 8).range(0.5, 3),
-        y0: LFPulse.kr(t / 8).range(0, 4),
-        mul: LFSaw.kr(t * 8).range(0.5, 2)
-    ) * -4.dbamp;
-});
-)
-
-(
-Ndef(\m42, {
-    var sig1 = Gbman2DN.ar(
-        minfreq: 600 !2 * SinOscFB.kr(t * 8, feedback: 0.5).range(0.8, 3),
-        maxfreq: 150 * SinOsc.kr(t / 2).range(0.8, 1.2),
-        x0: 1.2,
-        y0: 2.5,
-        mul: LFSaw.kr(t / 4).range(0, 0.3)
-    );
-    var sig2 = LFSaw.ar(t / 4).range(0, 1.5);
-
-    sig1 * sig2 * -6.dbamp;
-});
-)
-
-(
-Ndef(\m43, {
     Gbman2DN.ar(
-        minfreq: 800 * LFPulse.kr(t / 8).range(2, 2),
-        maxfreq: 200,
+        minfreq: 60.midicps * 8,
+        maxfreq: 48.midicps,
         x0: 1.2,
         y0: 2,
         mul: LFSaw.kr(t).range(0, 0.8)
     ) ! 2;
 });
 )
+
+\m41 in:20;
+
+(
+Tdef(\t41, {
+    var event = (\amp: 0.5, \dur: 0.25, \root: ~root, \scale: ~scale, \wave: \saw);
+    Sx new: event play: 10;
+
+    loop {
+        var chord = 3.collect { ~degree.choose };
+        Sx.qset(\chord, chord, 1);
+        16.wait;
+    };
+}).play;
+);
+

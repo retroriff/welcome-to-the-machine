@@ -14,7 +14,7 @@ SynthDef.new(\gs, {
     // Density control (sync selects between Dust and Impulse)
     densCtrl = Select.ar(sync, [Dust.ar(dens), Impulse.ar(dens)]);
 
-     // Duration control (adds randomness to base duration)
+    // Duration control (adds randomness to base duration)
     durCtrl = baseDur * LFNoise1.kr(100).exprange(1 / durRand, durRand);
 
     // Envelope generation
@@ -40,7 +40,7 @@ SynthDef.new(\gs, {
     posCtrl = posCtrl / BufSamples.ir(buf);
     posCtrl = posCtrl + pos;
 
-     // Granular synthesis
+    // Granular synthesis
     sig = GrainBuf.ar(
         numChannels: 2,
         trigger: densCtrl,

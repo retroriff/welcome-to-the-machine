@@ -1,11 +1,11 @@
 (
-b = Buffer.readChannel(s, u +/+ "/Samples/Live Coding/machine/Welcome to the Machine [vocals] 01.wav", channels:[0]);
+b = Buffer.readChannel(s, u +/+ "/Samples/Live Coding/machine/Welcome to the Machine 03.wav", channels:[0]);
 1 i: \gs dur: Pwhite(1, 10) args: (baseDur: Pkey(\dur), buf: b, dens: 10, pos: (Pwhite(0, 20) / 100), posSpeed: 0, sync: 1);
 )
 
 
 (
-~sample = Buffer.readChannel(s, u +/+ "/Samples/Live Coding/machine/Welcome to the Machine [vocals] 03.wav", channels:[0]);
+~sample = Buffer.readChannel(s, u +/+ "/Samples/Live Coding/machine/Welcome to the Machine 03.wav", channels:[0]);
 
 SynthDef(\playSample, {
     var outBus = 0;

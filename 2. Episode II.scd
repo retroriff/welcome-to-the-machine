@@ -61,6 +61,6 @@ Ndef(\m25, {
         freq: [1, 1.01] * 40.midicps * lfo1,
         feedback: LFSaw.kr(t / 3).range(0.1, 1),
         mul: LFPulse.kr(t / 2).range(0.2, 1) * lfo2
-    ) * -4.dbamp;
+    ) * -6.dbamp;
 });
 )
