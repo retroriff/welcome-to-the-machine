@@ -26,6 +26,11 @@ var keysAndScales = Dictionary[
 ~key = keysAndScales[chord][\key];
 ~root = keysAndScales[chord][\root];
 ~scale = keysAndScales[chord][\scale];
+
+// Send clock to Animatron
+n = NetAddr("192.168.1.140", 56101);
+Pbindef(\clock, \dur, 1/4, \amp, 0, \finish, Pfunc{ n.sendMsg("/clock"); }).play;
+"🟢 Welcome to the machine.".postln;"";
 )
 
 (
