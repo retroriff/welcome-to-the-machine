@@ -52,12 +52,26 @@ Ndef(\m62, {
         mul: -6.dbamp
     );
 
-}).fadeTime_(0).play;
+}).fadeTime_(5).play;
+)
+
+(
+Ndef(\m63, {
+    Klank.ar(
+        specificationsArrayRef: `[
+            [4, 1, 3, 5, 7],
+            Array.fill(4, 0.05),
+            Array.fill(4, 1)
+        ],
+        input: { ClipNoise.ar(0.02) }.dup,
+        freqscale: 64.midicps
+    );
+});
 )
 
 \m61 in: 10;
-Ndef(\m61).set(\detune, 0);
+Ndef(\m61).set(\detune, 1);
 Ndef(\m61).set(\degree, (3..5).choose * 12 + 4);
 
-2 play: ["machine/metal", 1] dur: 2 human: 0.4 reverb: 0.3 delay: 0.3 amp: 0.2 off: 1;
-\3 play: ["machine/metal", 0] dur: 34;
+2 play: ["machine/metal", 1] dur: 2 human: 0.4 reverb: 0.3 delay: 0.3 amp: 0.3;
+3 play: ["machine/metal", 0] dur: 0.5 euclid: [3, 5];

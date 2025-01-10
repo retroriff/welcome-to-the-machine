@@ -1,9 +1,6 @@
 // Play with freq: SinOsc.kr(t).range(62, 100).midicps
 // Play with tempo: 16
 
-Ndef(\m51).set(\freq, 50);
-Ndef(\m51).set(\tempo, 16);
-
 (
 Ndef(\m51, {
     RLPF.ar(
@@ -13,12 +10,6 @@ Ndef(\m51, {
     );
 });
 )
-
-Ndef(\m51).play;
-Ndef(\m51).stop;
-
-Ndef(\m52).play;
-Ndef(\m52).stop;
 
 (
 Ndef(\m52, {
@@ -36,7 +27,7 @@ Ndef(\m52, {
 
 
 (
-var collection = [ 0, 7, 5, 3, 7, 5, 0, 3, 3, 0, 5, 7, 3, 5, 7, 0 ];
+var collection = [0, 3, 5, 7].stutter(2).scramble.mirror2;
 var buffer = Buffer.loadCollection(s, collection);
 
 ("🎲" + collection).postln;
@@ -60,12 +51,4 @@ Ndef(\m53, {
 });
 )
 
-\m53 in: 20;
-
-Ndef(\m53).set(\step, 1);
-
 Fx new: \m53 delay: 0.3 gverb: 0.6;
-Fx new: \m52 delay: 0.3 gverb: 0.7;
-Fx.activeEffects
-
-1 play: ["machine/metal", 1] dur: 2 amp: 0.4
