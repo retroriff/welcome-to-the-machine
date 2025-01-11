@@ -1,4 +1,11 @@
 (
+var sendOscToAnimatron = {
+    n = NetAddr("192.168.1.140", 56101);
+    Pbindef(\clock, \dur, 1/4, \amp, 0, \finish, Pfunc{ n.sendMsg("/clock"); }).play;
+    Mouse.start;
+    Mouse(\send, { |mouse, x| x.round(0.001).postln });
+};
+
 var chord = \emAdd9;
 var keysAndScales = Dictionary[
     \cMaj7 -> Dictionary[
@@ -20,16 +27,15 @@ var keysAndScales = Dictionary[
         \scale -> \major
     ],
 ];
-
 ~buf = Buffer.readChannel(s, "samples/Chord1.aiff".resolveRelative, channels:[0]);
 ~degree = keysAndScales[chord][\degree];
 ~key = keysAndScales[chord][\key];
 ~root = keysAndScales[chord][\root];
 ~scale = keysAndScales[chord][\scale];
 
-// Send clock to Animatron
-n = NetAddr("192.168.1.140", 56101);
-Pbindef(\clock, \dur, 1/4, \amp, 0, \finish, Pfunc{ n.sendMsg("/clock"); }).play;
+// sendOscToAnimatron.value;
+// Mouse.free;
+
 "🟢 Welcome to the machine.".postln;"";
 )
 
