@@ -2,8 +2,11 @@
 var sendOscToAnimatron = {
     n = NetAddr("192.168.1.140", 56101);
     Pbindef(\clock, \dur, 1/4, \amp, 0, \finish, Pfunc{ n.sendMsg("/clock"); }).play;
-    Mouse.start;
-    Mouse(\send, { |mouse, x| x.round(0.001).postln });
+
+    if (\Mouse.asClass.notNil) {
+        Mouse.start;
+        Mouse(\send, { |mouse, x| x.round(0.001).postln });
+    };
 };
 
 var chord = \emAdd9;
