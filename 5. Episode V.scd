@@ -5,11 +5,14 @@
 Ndef(\m51, {
     RLPF.ar(
         in: LFPulse.ar([28, 40].midicps, iphase: 0.15),
-        freq: SinOsc.kr(t / \tempo.kr(1)).range(62, \freq.kr(67).clip(67, 120)).midicps,
+        freq: SinOsc.kr(t / \tempo.kr(1), phase: -0.5).range(62, \freq.kr(67).clip(67, 120)).midicps,
         mul: LFPulse.kr(t * 4).range(0, 1).lag(0.1),
     );
 });
 )
+
+// Double bass
+1 chan: 2 dur: 1 octave: [2, 3] degree: 2 amp: 1;
 
 (
 Ndef(\m52, {
@@ -52,3 +55,9 @@ Ndef(\m53, {
 )
 
 Fx new: \m53 delay: 0.3 gverb: 0.6;
+
+// On the run
+[4, 7, 9, 7, 14, 12, 14, 16]
+1 i: \ch dur: 0.25;
+Fx(\1).blp(1);
+2 i: \oh dur: 2 amp: 1.2 off: 1;

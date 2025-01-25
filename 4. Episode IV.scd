@@ -12,7 +12,15 @@ Ndef(\m41, {
 
 (
 Tdef(\t41, {
-    var event = (\amp: 0.5, \dur: 0.25, \root: ~root, \scale: ~scale, \wave: \saw, \vcf: 0);
+    var event = (
+        \amp: 0.5,
+        \dur: 0.25,
+        \root: ~root,
+        \scale: ~scale,
+        \wave: \saw,
+        \vcf: 0,
+    );
+
     Sx new: event play: 10;
 
     loop {
@@ -22,3 +30,5 @@ Tdef(\t41, {
     };
 }).play;
 );
+
+1 loop: ["machine/bass", 0] dur: 4 a: 1

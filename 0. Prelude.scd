@@ -35,6 +35,7 @@ var keysAndScales = Dictionary[
 ~key = keysAndScales[chord][\key];
 ~root = keysAndScales[chord][\root];
 ~scale = keysAndScales[chord][\scale];
+~voice = Buffer.readChannel(s, u +/+ "samples/Live Coding/machine/voice/01.wav", channels:[0]);
 
 // sendOscToAnimatron.value;
 // Mouse.free;

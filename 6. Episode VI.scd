@@ -56,22 +56,66 @@ Ndef(\m62, {
 )
 
 (
-Ndef(\m63, {
-    Klank.ar(
-        specificationsArrayRef: `[
-            [4, 1, 3, 5, 7],
-            Array.fill(4, 0.05),
-            Array.fill(4, 1)
-        ],
-        input: { ClipNoise.ar(0.02) }.dup,
-        freqscale: 64.midicps
+Tdef(\t63, {
+    loop {
+        var midinote = (~degree + 60);
+        var midinote2 = (60..72);
+
+        Ndef(\m63, {
+            Klank.ar(
+                specificationsArrayRef: `[
+                    [1, 3, 4, 5, 7],
+                    Array.fill(4, 0.05),
+                    Array.fill(4, 1)
+                ],
+                input: { ClipNoise.ar(0.02) }.dup,
+                freqscale: midinote.choose.midicps
+            );
+        }).fadeTime_(5).play;
+
+        [4, 8, 12, 16].choose.wait;
+    }
+}).play;
+)
+
+(
+Ndef(\m02, {
+    var note1 = \note1.kr(0.32);
+    var randPos = [note1, note1, \note2.kr(0.92), note1];
+    var pos = Demand.kr(
+        Impulse.kr(t / 1),
+        reset: 0,
+        demandUGens: Dseq(randPos, inf)
     );
-});
+
+    var pattern = Dseq(Bjorklund2(5, 8), inf) * (0.5 / 4);
+    var trig = TDuty.ar(pattern);
+
+    var sig = GrainBuf.ar(
+        numChannels: 2,
+        trigger: trig,
+        dur: Impulse.kr(1).exprange(0.2, 0.4),
+        sndbuf: ~buf,
+        rate: 1,
+        pos: (pos + MouseX.kr(-0.02, 0.02)).clip(0, 1),
+        pan: LFNoise1.kr(1).range(-0.5, 0.5),
+    );
+
+    var lfo = SinOsc.kr(0.1).exprange(0.05, 0.5);
+
+    CombC.ar(
+        in: sig,
+        maxdelaytime: 0.5,
+        delaytime: 0.2,
+        mul: 2
+    );
+}).play;
 )
 
 \m61 in: 10;
 Ndef(\m61).set(\detune, 1);
 Ndef(\m61).set(\degree, (3..5).choose * 12 + 4);
+Ndef(\m02).set(\note2, 0.88)
 
 2 play: ["machine/metal", 1] dur: 2 human: 0.4 reverb: 0.3 delay: 0.3 amp: 0.3;
-3 play: ["machine/metal", 0] dur: 0.5 euclid: [3, 5];
+3 play: ["machine/metal", 0] dur: 0.5 euclid: [2, 5];
