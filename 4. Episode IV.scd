@@ -5,15 +5,15 @@ Ndef(\m41, {
         maxfreq: 48.midicps,
         x0: 1.2,
         y0: 2,
-        mul: LFSaw.kr(t).range(0, 0.8)
+        mul: LFSaw.kr(t).range(0, 0.7)
     ) ! 2;
-});
+}).play;
 )
 
 (
-Tdef(\t41, {
+Tdef(\t42, {
     var event = (
-        \amp: 0.5,
+        \amp: 0.4,
         \dur: 0.25,
         \root: ~root,
         \scale: ~scale,

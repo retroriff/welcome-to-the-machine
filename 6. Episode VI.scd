@@ -95,7 +95,7 @@ Ndef(\m02, {
         numChannels: 2,
         trigger: trig,
         dur: Impulse.kr(1).exprange(0.2, 0.4),
-        sndbuf: ~buf,
+        sndbuf: ~voice,
         rate: 1,
         pos: (pos + MouseX.kr(-0.02, 0.02)).clip(0, 1),
         pan: LFNoise1.kr(1).range(-0.5, 0.5),
