@@ -1,4 +1,39 @@
 (
+Ndef(\shepard, {
+    |freq = 440, amp = 0.5, direction = 1, chord = #[0, 3, 7, 14]|
+
+    var partialCount = 4;
+    var octRange = 2 ** (partialCount / 2);
+    var cycle = 1 / (partialCount * 20); // Cycle duration (20 seconds per octave)
+    var width = if (direction >= 0, 1, 0);
+
+    // Continuous Shepard tone for each chord interval
+    var sig = chord.collect { |interval|
+        var baseFreq = freq * (2 ** (interval / 12)); // Convert MIDI interval to frequency ratio
+
+        Array.fill(partialCount, { |n|
+            var offset = n / partialCount;
+            var phase = (3 * pi / 2) + (2 * pi * offset);
+            var vol = SinOsc.kr(cycle, phase).range(0, 1); // Volume modulation
+            var ratio = VarSaw.kr(cycle, offset, width).exprange(1 / octRange, octRange); // Shepard tone scaling
+            SinOsc.ar(baseFreq * ratio, mul: 0.3) * vol;
+        }).sum;
+    }.sum;
+
+    sig = sig ! 2 * (amp / partialCount); // Stereo output
+    sig = JPverb.ar(sig); // Add reverb
+}).play;
+)
+
+(
+Ndef(\shepard).set(
+    \amp, 0.5,
+    \freq, 48.midicps, // Base frequency
+    \chord, #[0, 4, 7, 12], // Chord intervals
+);
+)
+
+(
 SynthDef(\shepard, {
     |amp = 1, dur = 20, direction = 1, freq = 440|
 

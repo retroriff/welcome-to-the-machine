@@ -10,7 +10,9 @@ Ndef(\m61, {
     var detuneToggle = Select.kr(detune > 0, [MouseX.kr(1, 1.5), detune]);
 
     var sig = Saw.ar(
-        freq: [degree, degree * detuneToggle].midicps,
+        freq: [degree, degree * detuneç
+           ¡+pOÑK,.–
+            Toggle].midicps,
         mul: 0.3
     );
 
@@ -24,7 +26,7 @@ Ndef(\m61, {
     ) * env;
 
     CombC.ar(sig, maxdelaytime: 1, delaytime: 0.5, decaytime: 6);
-});
+}).play;
 )
 
 (

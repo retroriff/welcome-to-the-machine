@@ -30,12 +30,13 @@ var keysAndScales = Dictionary[
         \scale -> \major
     ],
 ];
+
 ~buf = Buffer.readChannel(s, "samples/Chord1.aiff".resolveRelative, channels:[0]);
 ~degree = keysAndScales[chord][\degree];
 ~key = keysAndScales[chord][\key];
 ~root = keysAndScales[chord][\root];
 ~scale = keysAndScales[chord][\scale];
-~voice = Buffer.readChannel(s, u +/+ "samples/Live Coding/machine/voice/01.wav", channels:[0]);
+~voice = Buffer.readChannel(s, "samples/voice/01.wav".resolveRelative, channels:[0]);
 
 // sendOscToAnimatron.value;
 // Mouse.free;
