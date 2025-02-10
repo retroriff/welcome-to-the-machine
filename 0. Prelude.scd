@@ -10,6 +10,7 @@ var sendOscToAnimatron = {
 };
 
 var chord = \emAdd9;
+
 var keysAndScales = Dictionary[
     \cMaj7 -> Dictionary[
         \degree -> [0, 4, 7, 11],
@@ -31,12 +32,17 @@ var keysAndScales = Dictionary[
     ],
 ];
 
-~buf = Buffer.readChannel(s, "samples/Chord1.aiff".resolveRelative, channels:[0]);
+var loadBuffer = { |path, channel = 0|
+    Buffer.readChannel(s, path.resolveRelative, channels: [channel]);
+};
+
+~machine = NetAddr("127.0.0.1", 41234);
+~buf = loadBuffer.("samples/chords/01.aiff");
+~voice = loadBuffer.("samples/voice/01.wav");
 ~degree = keysAndScales[chord][\degree];
 ~key = keysAndScales[chord][\key];
 ~root = keysAndScales[chord][\root];
 ~scale = keysAndScales[chord][\scale];
-~voice = Buffer.readChannel(s, "samples/voice/01.wav".resolveRelative, channels:[0]);
 
 // sendOscToAnimatron.value;
 // Mouse.free;
@@ -45,7 +51,7 @@ var keysAndScales = Dictionary[
 )
 
 (
-Tdef(\t01, {
+Tdef(\m01, {
     loop {
         (1..8).choose.do({
             var octaves = [0.25, 0.5, 1, 2].choose;
@@ -68,11 +74,11 @@ Tdef(\t01, {
             exprand(0.1, 8).wait;
         });
     };
-}).play;
+});
 )
 
 (
-Ndef(\m01, {
+Ndef(\m02, {
     var buffer = Buffer.alloc(s, ~degree.size, 1, {|b| b.setnMsg(0, ~degree) });
 
     var freq = DegreeToKey.kr(
@@ -110,12 +116,12 @@ Ndef(\m01, {
         damp: 0.5
     );
 
-    (osc1 + osc2) * \dbamp.kr(-2).dbamp;
+    (osc1 + osc2) * \dbamp.kr(-6).dbamp;
 });
 )
 
 (
-Ndef(\m02, {
+Ndef(\m03, {
     var lfo1 = LFPulse.ar(t / 2).range(0.5, 1);
     var lfo2 = SinOscFB.ar(t * 8).range(0.5, 1);
     var randPos = Array.rand(4, 1, 4) / 10;

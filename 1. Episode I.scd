@@ -34,14 +34,14 @@ Ndef(\m12, {
 )
 
 
-1 play: ["fm", \rand] amp: 0.5 dur: 0.25 beat: 1 weight: 0.2 seed: 13;
-2 play: ["fm", \rand] amp: 0.5 dur: 0.25 fill: 1 weight: 0.2 seed: 830;
-3 play: ["fm", \rand] amp: 0.5 dur: 0.25 fill: 1 weight: 0.2 seed: 450;
+1 play: ["fm", \rand] amp: 0.2 dur: 0.25 beat: 1 weight: 0.2 seed: 13;
+2 play: ["fm", \rand] amp: 0.2 dur: 0.25 fill: 1 weight: 0.2 seed: 830;
+3 play: ["fm", \rand] amp: 0.2 dur: 0.25 fill: 1 weight: 0.2 seed: 450;
 808 i: \ch dur: 0.25 amp: 0.1;
 Px reverb: 0.4 blp: 0.4;
 
 (
-Ndef(\m14, {
+Ndef(\m13, {
     Greyhole.ar(
         in: Impulse.ar(t * MouseX.kr(1, 1000), mul: 0.3),
         delayTime: 2,

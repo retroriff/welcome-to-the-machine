@@ -10,9 +10,7 @@ Ndef(\m61, {
     var detuneToggle = Select.kr(detune > 0, [MouseX.kr(1, 1.5), detune]);
 
     var sig = Saw.ar(
-        freq: [degree, degree * detuneç
-           ¡+pOÑK,.–
-            Toggle].midicps,
+        freq: [degree, degree * detuneToggle].midicps,
         mul: 0.3
     );
 
@@ -58,18 +56,18 @@ Ndef(\m62, {
 )
 
 (
-Tdef(\t63, {
+Tdef(\m63, {
     loop {
         var midinote = (~degree + 60);
         var midinote2 = (60..72);
 
         Ndef(\m63, {
+            var freqs = [1, 3, 4, 5, 7];
+            var amps = Array.fill(4, 0.05);
+            var ringTimes = Array.fill(4, 1);
+
             Klank.ar(
-                specificationsArrayRef: `[
-                    [1, 3, 4, 5, 7],
-                    Array.fill(4, 0.05),
-                    Array.fill(4, 1)
-                ],
+                `[freqs, amps, ringTimes],
                 input: { ClipNoise.ar(0.02) }.dup,
                 freqscale: midinote.choose.midicps
             );
@@ -81,7 +79,7 @@ Tdef(\t63, {
 )
 
 (
-Ndef(\m02, {
+Ndef(\m64, {
     var note1 = \note1.kr(0.32);
     var randPos = [note1, note1, \note2.kr(0.92), note1];
     var pos = Demand.kr(
@@ -117,7 +115,7 @@ Ndef(\m02, {
 \m61 in: 10;
 Ndef(\m61).set(\detune, 1);
 Ndef(\m61).set(\degree, (3..5).choose * 12 + 4);
-Ndef(\m02).set(\note2, 0.88)
+Ndef(\m64).set(\note2, 0.88)
 
 2 play: ["machine/metal", 1] dur: 2 human: 0.4 reverb: 0.3 delay: 0.3 amp: 0.3;
 3 play: ["machine/metal", 0] dur: 0.5 euclid: [2, 5];
