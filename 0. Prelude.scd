@@ -9,7 +9,6 @@ var sendOscToAnimatron = {
     };
 };
 
-var chord = \emAdd9;
 
 var keysAndScales = Dictionary[
     \cMaj7 -> Dictionary[
@@ -36,16 +35,18 @@ var loadBuffer = { |path, channel = 0|
     Buffer.readChannel(s, path.resolveRelative, channels: [channel]);
 };
 
+~chord = \emAdd9;
 ~machine = NetAddr("127.0.0.1", 41234);
 ~buf = loadBuffer.("samples/chords/01.aiff");
 ~voice = loadBuffer.("samples/voice/01.wav");
-~degree = keysAndScales[chord][\degree];
-~key = keysAndScales[chord][\key];
-~root = keysAndScales[chord][\root];
-~scale = keysAndScales[chord][\scale];
+~degree = keysAndScales[~chord][\degree];
+~key = keysAndScales[~chord][\key];
+~root = keysAndScales[~chord][\root];
+~scale = keysAndScales[~chord][\scale];
 
 // sendOscToAnimatron.value;
 // Mouse.free;
+Px.listen;
 
 "🟢 Welcome to the machine.".postln;"";
 )

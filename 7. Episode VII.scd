@@ -1,5 +1,5 @@
 (
-var chan, currentNote = nil, keyNote, isPlaying, midiNote, octaves, scale;
+var chan, currentNote, keyNote, isPlaying, midiNote, octaves, scale;
 
 if (MIDIClient.initialized == false)
 { MIDIClient.init };
@@ -22,29 +22,46 @@ octaves = (4..5);
 ~stopNote.value;
 
 Mouse(\a, { |mouse, x, y|
-    var baseNote, degreeIndex, noteIndex, octaveIndex, scaleDegree, totalDegrees, velocity;
-    a = x.round(0.0001);
+    var msgArgs;
 
-    totalDegrees = scale.size * octaves.size;
-    degreeIndex = (a.linlin(0, 1, 0, totalDegrees)).round.clip(0, totalDegrees - 1);
-    octaveIndex = (degreeIndex / scale.size).floor;
-    scaleDegree = scale.wrapAt(degreeIndex % scale.size);
-    baseNote = (octaves.at(octaveIndex) * 12) + scaleDegree + (keyNote % 12);
-    velocity = (y.round(0.001) * 100).asInteger;
+    var calculateNoteFromXPosition = { |xPosition|
+        var totalDegrees = scale.size * octaves.size;
+        var degreeIndex = (xPosition.linlin(0, 1, 0, totalDegrees)).round.clip(0, totalDegrees - 1);
+        var octaveIndex = (degreeIndex / scale.size).floor;
+        var scaleDegree = scale.wrapAt(degreeIndex % scale.size);
+        (octaves.at(octaveIndex) * 12) + scaleDegree + (keyNote % 12);
+    };
 
-    if (currentNote != baseNote) {
+    var newNote = calculateNoteFromXPosition.(x);
+    var velocity = (y.round(0.001) * 100).asInteger;
+
+    if (currentNote != newNote) {
         if (currentNote.notNil) {
-            m.noteOff(~chan, currentNote);
+            // m.noteOff(~chan, currentNote);
         };
 
-        m.noteOn(~chan, baseNote, velocity);
-        currentNote = baseNote;
+        // m.noteOn(~chan, newNote, velocity);
+        currentNote = newNote;
+
+        if (~machine.notNil) {
+            msgArgs = [
+                "track", "0",
+                "midinote", newNote,
+                "chord", ~chord.asString,
+                "scale", ~scale.asString,
+            ];
+            ~machine.sendMsg("/machine", *msgArgs);
+            // msgArgs.postln;
+        } {
+            "🔴 Machine's net address is not set".postln;
+        };
     };
 });
 )
 
 (
-// Kill'Em All 🔴🔨
 Mouse(\a).free;
 ~stopNote.value;
+~machine.sendMsg("/machine", "track", Nil);
+"Kill'Em All 🔴🔨";
 )

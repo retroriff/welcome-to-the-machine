@@ -30,7 +30,7 @@ Ndef(\m52, {
 });
 )
 
-(
+( // 🎛️
 var collection = [0, 3, 5, 7].stutter(2).scramble.mirror2;
 var buffer = Buffer.loadCollection(s, collection);
 

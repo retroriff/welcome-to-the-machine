@@ -1,5 +1,5 @@
 (
-w = Buffer.readChannel(s, "samples/speech/01.wav".resolveRelative, channels:[0]);
+w = Buffer.readChannel(s, "../samples/speech/01.wav".resolveRelative, channels:[0]);
 
 SynthDef(\slow_playback_with_fx, {
     |buf, rate = 0.8|
