@@ -1,3 +1,5 @@
+~machine.sendMsg("/machine", "track", 1);
+
 (
 Ndef(\m11, {
     var freq = \freq.kr(40);

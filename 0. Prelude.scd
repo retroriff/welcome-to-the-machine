@@ -81,18 +81,19 @@ Tdef(\m01, {
 (
 Ndef(\m02, {
     var buffer = Buffer.alloc(s, ~degree.size, 1, {|b| b.setnMsg(0, ~degree) });
+    var key = \key.kr(~key);
 
     var freq = DegreeToKey.kr(
         buffer.bufnum,
         in: MouseX.kr(0, 12),
         octave: 12,
         mul: 1,
-        add: ~key
+        add: key
     );
 
     var drone5ths = RLPF.ar(
-        in: LFPulse.ar([~key, ~key + 7].midicps, iphase: 0.15),
-        freq: SinOsc.kr(0.1, mul: 10, add: ~key + 12).midicps,
+        in: LFPulse.ar([key, key + 7].midicps, iphase: 0.15),
+        freq: SinOsc.kr(0.1, mul: 10, add: key + 12).midicps,
         rq: 0.1,
         mul: 0.05
     );
