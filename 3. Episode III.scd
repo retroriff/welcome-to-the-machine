@@ -3,7 +3,7 @@ Ndef(\m31, {
     var sig = LFSaw.ar(
         freq: [28, 40].midicps,
         iphase: 0,
-        mul: LFSaw.kr(t / 2).range(0.1, 0.8)
+        mul: LFSaw.kr(t / 2).range(0.1, 0.7)
     );
 
     sig * -12.dbamp;
@@ -21,17 +21,19 @@ Ndef(\m32, {
 
     var sig2 = LFPulse.ar(t / 8).range(0.2, 1);
 
-    sig1 * sig2 * -4.dbamp;
+    Pan2.ar(
+        in: Mix.ar(sig1 * sig2),
+        pos: SinOsc.ar(t / 4)
+    ) * -4.dbamp;
 });
 )
-
 
 (
 Ndef(\m33, {
     SinOscFB.ar(
         freq: [52, 64].midicps + 12,
         feedback: LFSaw.kr(t / 4).range(0.01, 1),
-        mul: LFSaw.kr(t * 4).range(0, 0.6)
+        mul: LFSaw.kr(t * 4).range(0, 0.6).lag
     ) * -7.dbamp;
 });
 )
