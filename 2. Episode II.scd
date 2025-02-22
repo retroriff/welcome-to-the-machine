@@ -36,11 +36,13 @@ Ndef(\m23, {
 
 (
 Ndef(\m24, {
-    Pulse.ar(
+    var sig = Pulse.ar(
         freq: [40, 52].midicps * Gbman2DN.kr(t / 2).range(6, 6),
         width: SinOsc.kr(t / 8).unipolar(1),
         mul: LFPulse.kr(t * 8, iphase: 0).unipolar(0.4);
     ) * -9.dbamp;
+    
+    Pan2.ar(Mix.ar(sig), SinOsc.kr(t / 4));
 });
 )
 
