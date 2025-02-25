@@ -36,16 +36,20 @@ var loadBuffer = { |path, channel = 0|
 };
 
 ~setChord = { |chord, ndef|
-    ~chord = chord;
-    ~degree = keysAndScales[~chord][\degree];
-    ~key = keysAndScales[~chord][\key];
-    ~root = keysAndScales[~chord][\root];
-    ~scale = keysAndScales[~chord][\scale];
+    if (chord.notNil) {
+        ~chord = chord;
+        ~degree = keysAndScales[~chord][\degree];
+        ~key = keysAndScales[~chord][\key];
+        ~root = keysAndScales[~chord][\root];
+        ~scale = keysAndScales[~chord][\scale];
 
-    if (ndef.notNil) {
-        Ndef(ndef).set(\degree, ~degree);
-        Ndef(ndef).set(\key, ~key);
-    };
+        if (ndef.notNil) {
+            Ndef(ndef).set(\degree, ~degree);
+            Ndef(ndef).set(\key, ~key);
+        };
+    } {
+        keysAndScales.keys;
+    }
 };
 
 ~setChord.(\emAdd9);
