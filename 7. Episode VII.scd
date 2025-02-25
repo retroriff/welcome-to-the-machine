@@ -28,7 +28,7 @@ var stopNote = {
 initMidi.value;
 defaultValues.value;
 
-~playInstrument = { |isMidi, isOsc = true|
+~playInstrument = { |isMidi, isOsc = true, post|
     stopNote.value;
 
     Mouse(\a, { |mouse, x, y|
@@ -64,7 +64,10 @@ defaultValues.value;
                     "scale", ~scale.asString,
                 ];
                 ~machine.sendMsg("/machine", *msgArgs);
-                msgArgs.postln;
+                
+                if (post) {
+                    msgArgs.postln;
+                } 
             } {
                 "🔴 Machine's net address is not set".postln;
             };
@@ -102,4 +105,4 @@ defaultValues.value;
 ~playInstrument.();
 ~stopInstrument.value;
 ~replaceInstrument.(1);
-Px.release(0);
+Px.stop;

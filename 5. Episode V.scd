@@ -6,7 +6,7 @@ Ndef(\m51, {
     |amp = 0.7, freq = 120, tempo = 16|
 
     RLPF.ar(
-        in: LFPulse.ar([28, 40].midicps),
+        in: Pulse.ar([28, 40].midicps),
         freq: SinOsc.kr(t / tempo, phase: -1).range(62, freq.clip(67, 120)).midicps,
         mul: LFPulse.kr(t * 4).range(0, amp).lag(0.1),
     );
