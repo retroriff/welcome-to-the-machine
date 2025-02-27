@@ -1,5 +1,4 @@
-// Play with freq: SinOsc.kr(t).range(62, 100).midicps
-// Play with tempo: 16
+~machine.sendMsg("/machine", "track", 5);
 
 (
 Ndef(\m51, {
@@ -13,8 +12,7 @@ Ndef(\m51, {
 }).quant_(16);
 )
 
-// Double bass
-1 chan: 2 dur: 1 octave: [2, 3] degree: 2 amp: 1;
+5 name: \bass chan: 2 dur: 1 octave: [2, 3] degree: 2 amp: 1;
 
 (
 Ndef(\m52, {

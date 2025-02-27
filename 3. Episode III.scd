@@ -1,12 +1,11 @@
 (
 Ndef(\m31, {
-    var sig = LFSaw.ar(
+    var sig = Saw.ar(
         freq: [28, 40].midicps,
-        iphase: 0,
-        mul: LFSaw.kr(t / 2).range(0.1, 0.7)
+        mul: LFSaw.kr(t / 2).range(0, 0.7)
     );
 
-    sig * -12.dbamp;
+    sig * -10.dbamp;
 });
 )
 

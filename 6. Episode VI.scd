@@ -1,3 +1,5 @@
+~machine.sendMsg("/machine", "track", 6);
+
 (
 Ndef(\m61, {
     var degree = \degree.kr(52);

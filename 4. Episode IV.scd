@@ -7,7 +7,7 @@ Ndef(\m41, {
         y0: 2,
         mul: LFSaw.kr(t).range(0, 0.7)
     ) ! 2;
-}).play;
+});
 )
 
 (
@@ -28,7 +28,5 @@ Tdef(\t42, {
         Sx.qset(\chord, chord, 1);
         16.wait;
     };
-}).play;
+});
 );
-
-1 loop: ["machine/bass", 0] dur: 4 a: 1

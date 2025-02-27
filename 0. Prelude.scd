@@ -69,7 +69,7 @@ Ndef(\m02, {
         damp: 0.5
     );
 
-    (osc1 + osc2) * \dbamp.kr(-6).dbamp;
+    (osc1 + osc2) * \dbamp.kr(-4).dbamp;
 });
 )
 

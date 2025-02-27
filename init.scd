@@ -46,6 +46,8 @@ var loadBuffer = { |path, channel = 0|
         if (ndef.notNil) {
             Ndef(ndef).set(\degree, ~degree);
             Ndef(ndef).set(\key, ~key);
+        } {
+            "🔶 Chord changed without Ndef";
         };
     } {
         keysAndScales.keys;
@@ -61,5 +63,5 @@ var loadBuffer = { |path, channel = 0|
 // Mouse.free;
 Px.listen;
 
-"🟢 Welcome to the machine.".postln;"";
+"🟢 Welcome to the machine";
 )
