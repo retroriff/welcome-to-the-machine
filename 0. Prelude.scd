@@ -65,7 +65,7 @@ Ndef(\m02, {
 
   osc2 = Greyhole.ar(
     in: osc2 * MouseY.kr(0, 1),
-    delayTime: 2nam
+    delayTime: 2,
     damp: 0.5
   );
 

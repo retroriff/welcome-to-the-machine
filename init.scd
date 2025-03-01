@@ -59,9 +59,12 @@ var loadBuffer = { |path, channel = 0|
 ~machine = NetAddr("127.0.0.1", 41234);
 ~voice = loadBuffer.("samples/voice/01.wav");
 
+"mouse.scd".loadRelative;
+
 // sendOscToAnimatron.value;
 // Mouse.free;
 Px.listen;
 
 "🟢 Welcome to the machine";
+
 )

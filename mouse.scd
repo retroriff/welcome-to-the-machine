@@ -28,7 +28,9 @@ var stopNote = {
 initMidi.value;
 defaultValues.value;
 
-~playInstrument = { |isMidi, isOsc = true, post|
+~playInstrument = {
+  arg isMidi = false, isOsc = true, post = false;
+
   stopNote.value;
 
   Mouse(\a, { |mouse, x, y|
@@ -102,7 +104,3 @@ defaultValues.value;
 };
 )
 
-~playInstrument.();
-~stopInstrument.value;
-~replaceInstrument.(1);
-Px.stop;
