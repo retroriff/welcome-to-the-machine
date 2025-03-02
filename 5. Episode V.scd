@@ -2,7 +2,7 @@
 
 (
 Ndef(\m51, {
-  |amp = 0.7, freq = 120, tempo = 16|
+  |amp = 0.6, freq = 120, tempo = 16|
 
   RLPF.ar(
     in: Pulse.ar([28, 40].midicps),

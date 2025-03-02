@@ -5,7 +5,7 @@ Ndef(\m41, {
     maxfreq: 48.midicps,
     x0: 1.2,
     y0: 2,
-    mul: LFSaw.kr(t).range(0, 0.7)
+    mul: LFSaw.kr(t).range(0, 0.8)
   ) ! 2;
 });
 )
@@ -29,4 +29,4 @@ Tdef(\t42, {
     16.wait;
   };
 });
-);
+)

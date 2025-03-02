@@ -109,7 +109,7 @@ Ndef(\m64, {
     in: sig,
     maxdelaytime: 0.5,
     delaytime: 0.2,
-    mul: 2
+    mul: \amp.kr(0.6)
   );
 }).play;
 )

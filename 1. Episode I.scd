@@ -19,7 +19,7 @@ Ndef(\m11, {
     maxdelaytime: 0.05,
     delaytime: SinOsc.ar(freq: 1, phase: [10, pi]).range(0, 0.4)
   );
-  out.tanh * -5.dbamp;
+  out.tanh * -6.dbamp;
 });
 )
 
@@ -42,7 +42,7 @@ Ndef(\m13, {
   Greyhole.ar(
     in: Impulse.ar(
       freq: t * MouseX.kr(1, 1000),
-      mul: MouseY.kr(0, \amp.kr(0.5))
+      mul: MouseY.kr(0, \amp.kr(0.3))
     ),
     delayTime: 2,
     damp: 0.5

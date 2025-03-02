@@ -2,10 +2,10 @@
 Ndef(\m31, {
   var sig = Saw.ar(
     freq: [28, 40].midicps,
-    mul: LFSaw.kr(t / 2).range(0, 0.7)
+    mul: LFSaw.kr(t / 2).range(0, 0.8)
   );
 
-  sig * -10.dbamp;
+  sig * -8.dbamp;
 });
 )
 

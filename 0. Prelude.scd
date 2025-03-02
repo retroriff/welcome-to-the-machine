@@ -9,7 +9,7 @@ Tdef(\m01, {
 
       4.do({
         Synth.new(\gs, [
-          \amp, exprand(0.05, 0.55),
+          \amp, exprand(0.05, 0.25),
           \atk, exprand(1, 4),
           \baseDur, 0.02,
           \buf, ~buf,
