@@ -1,4 +1,4 @@
-"init.scd".loadRelative;
+"lib/init.scd".loadRelative;
 
 (
 Tdef(\m01, {

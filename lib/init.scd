@@ -55,16 +55,15 @@ var loadBuffer = { |path, channel = 0|
 };
 
 ~setChord.(\emAdd9);
-~buf = loadBuffer.("samples/chords/01.aiff");
+~buf = loadBuffer.("../samples/chords/01.aiff");
 ~machine = NetAddr("127.0.0.1", 41234);
-~voice = loadBuffer.("samples/voice/01.wav");
+~voice = loadBuffer.("../samples/voice/01.wav");
 
 "mouse.scd".loadRelative;
 
 // sendOscToAnimatron.value;
 // Mouse.free;
+
 Px.listen;
-
 "🟢 Welcome to the machine";
-
 )
